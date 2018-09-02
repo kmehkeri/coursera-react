@@ -6,10 +6,11 @@ class DishDetail extends Component {
     render() {
         if (this.props.dish != null) {
             const comments = this.props.dish.comments.map((comment) => {
+                const commentDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(comment.date)));
                 return (
                     <blockquote key={comment.id} className="blockquote">
                         <span className="small">{comment.comment}</span>
-                        <span className="blockquote-footer">{comment.author}, <cite>{comment.date}</cite></span>
+                        <span className="blockquote-footer">{comment.author}, <cite>{commentDate}</cite></span>
                     </blockquote>
                 );
             });
