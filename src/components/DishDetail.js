@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Col, Container, Row } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle, Col, Row } from 'reactstrap';
 
 class DishDetail extends Component {
 
@@ -7,9 +7,9 @@ class DishDetail extends Component {
         if (this.props.dish != null) {
             const comments = this.props.dish.comments.map((comment) => {
                 return (
-                    <blockquote className="blockquote">
-                        <p class="small">{comment.comment}</p>
-                        <footer class="blockquote-footer">{comment.author}, <cite>{comment.date}</cite></footer>
+                    <blockquote key={comment.id} className="blockquote">
+                        <span className="small">{comment.comment}</span>
+                        <span className="blockquote-footer">{comment.author}, <cite>{comment.date}</cite></span>
                     </blockquote>
                 );
             });
@@ -29,7 +29,7 @@ class DishDetail extends Component {
                         <Card>
                             <CardBody>
                                 <CardTitle>Comments</CardTitle>
-                                <CardText>{comments}</CardText>
+                                <CardText tag="div">{comments}</CardText>
                             </CardBody>
                         </Card>
                     </Col>

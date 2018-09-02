@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import { Container, Navbar, NavbarBrand } from 'reactstrap';
 import Menu from './components/Menu';
 import './App.css';
