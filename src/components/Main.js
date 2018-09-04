@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import { Container, Navbar, NavbarBrand } from 'reactstrap';
+import { Container } from 'reactstrap';
 import Menu from './Menu';
+import Header from './Header';
+import Footer from './Footer';
 import DishDetail from './DishDetail'
 import { DISHES } from '../shared/dishes';
 
@@ -20,15 +22,12 @@ class Main extends Component {
     render() {
         return (
             <Fragment>
-                <Navbar dark color="primary">
-                    <Container>
-                        <NavbarBrand href="/">Cthulhu Restaurant</NavbarBrand>
-                    </Container>
-                </Navbar>
+                <Header />
                 <Container>
                     <Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)} />
                     <DishDetail dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]} />
                 </Container>
+                <Footer />
             </Fragment>
         );
     }

@@ -11,14 +11,11 @@ const MenuItem = ({dish, onClick}) =>
         </Card>
     </Col>
 
-const Menu = ({dishes, onClick}) => {
-    return (
-        <Row>
-            {dishes.map((dish) =>
-                <MenuItem key={dish.id} dish={dish} onClick={onClick} />
-            )}
-        </Row>
-    );
-}
+const Menu = ({dishes, onClick}) =>
+    <Row>
+        {dishes.map((dish) =>
+            <MenuItem key={dish.id} dish={dish} onClick={onClick} />
+        )}
+    </Row>
 
 export default Menu;
