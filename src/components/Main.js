@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Container, Navbar, NavbarBrand } from 'reactstrap';
 import Menu from './Menu';
 import DishDetail from './DishDetail'
@@ -19,7 +19,7 @@ class Main extends Component {
 
     render() {
         return (
-            <div>
+            <Fragment>
                 <Navbar dark color="primary">
                     <Container>
                         <NavbarBrand href="/">Cthulhu Restaurant</NavbarBrand>
@@ -29,7 +29,7 @@ class Main extends Component {
                     <Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)} />
                     <DishDetail dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]} />
                 </Container>
-            </div>
+            </Fragment>
         );
     }
 }
