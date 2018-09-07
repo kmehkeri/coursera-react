@@ -6,11 +6,11 @@ const Footer = (props) =>
     <Navbar dark color="secondary" className="mt-4">
         <Container className="text-white">
             <Row>
-                <Col>
+                <Col xs="auto">
                     <small>© Copyright 2018 Cthulhu Restaurant</small>
                 </Col>
                 <Col>
-                    <ul className="list-unstyled">
+                    <ul className="list-unstyled small">
                         <li><Link to="/home" className="text-white">Home</Link></li>
                         <li><Link to="/aboutus" className="text-white">About</Link></li>
                         <li><Link to="/menu" className="text-white">Menu</Link></li>
