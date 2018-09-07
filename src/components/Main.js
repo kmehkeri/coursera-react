@@ -4,11 +4,13 @@ import Menu from './Menu';
 import Home from './Home';
 import About from './About';
 import Contact from './Contact';
+import Dish from './Dish';
 import Header from './Header';
 import Footer from './Footer';
 import { DISHES } from '../shared/dishes';
 import { LEADERS } from '../shared/leaders';
 import { PROMOTIONS } from '../shared/promotions';
+import { COMMENTS } from '../shared/comments';
 
 class Main extends Component {
     constructor(props) {
@@ -16,22 +18,27 @@ class Main extends Component {
         this.state = {
             dishes: DISHES,
             leaders: LEADERS,
-            promotions: PROMOTIONS
+            promotions: PROMOTIONS,
+            comments: COMMENTS
         }
     }
 
     render() {
         const featured = (items) => items.filter((i) => i.featured )[0]
 
-        const HomePage = () => <Home dish={featured(this.state.dishes)} promotion={featured(this.state.promotions)} leader={featured(this.state.leaders)} />
-        const MenuPage = () => <Menu dishes={this.state.dishes} />
+        const HomeRoute = () => <Home dish={featured(this.state.dishes)} promotion={featured(this.state.promotions)} leader={featured(this.state.leaders)} />
+        const MenuRoute = () => <Menu dishes={this.state.dishes} />
+        const DishRoute = ({match}) =>
+            <Dish dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId))[0]}
+                  comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId))} />
 
         return (
             <Fragment>
                 <Header />
                 <Switch>
-                    <Route path="/home" component={HomePage} />
-                    <Route exact path="/menu" component={MenuPage} />
+                    <Route path="/home" component={HomeRoute} />
+                    <Route exact path="/menu" component={MenuRoute} />
+                    <Route path="/menu/:dishId" component={DishRoute}/>
                     <Route exact path="/about" component={About} />
                     <Route exact path="/contact" component={Contact} />
                     <Redirect to="/home" />

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Col, Container, Row } from 'reactstrap';
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Col, Container, Row, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
 
 const RenderCard = ({item}) =>
     <Col md="4" className="mb-1">
@@ -16,6 +15,11 @@ const RenderCard = ({item}) =>
 
 const Home = (props) =>
     <Container>
+        <Row>
+            <Breadcrumb>
+                <BreadcrumbItem active>Home</BreadcrumbItem>
+            </Breadcrumb>
+        </Row>
         <Row>
             <RenderCard item={props.dish} />
             <RenderCard item={props.promotion} />
