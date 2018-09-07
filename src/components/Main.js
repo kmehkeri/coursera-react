@@ -31,6 +31,7 @@ class Main extends Component {
         const DishRoute = ({match}) =>
             <Dish dish={this.state.dishes.filter((dish) => dish.id === parseInt(match.params.dishId))[0]}
                   comments={this.state.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId))} />
+        const AboutRoute = () => <About leaders={this.state.leaders} />
 
         return (
             <Fragment>
@@ -39,7 +40,7 @@ class Main extends Component {
                     <Route path="/home" component={HomeRoute} />
                     <Route exact path="/menu" component={MenuRoute} />
                     <Route path="/menu/:dishId" component={DishRoute}/>
-                    <Route exact path="/about" component={About} />
+                    <Route exact path="/about" component={AboutRoute} />
                     <Route exact path="/contact" component={Contact} />
                     <Redirect to="/home" />
                 </Switch>
