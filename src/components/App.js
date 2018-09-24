@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Menu from './Menu';
 import Home from './Home';
 import About from './About';
@@ -12,7 +12,7 @@ import { LEADERS } from '../shared/leaders';
 import { PROMOTIONS } from '../shared/promotions';
 import { COMMENTS } from '../shared/comments';
 
-class Main extends Component {
+class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,20 +34,22 @@ class Main extends Component {
         const AboutRoute = () => <About leaders={this.state.leaders} />
 
         return (
-            <Fragment>
-                <Header />
-                <Switch>
-                    <Route path="/home" component={HomeRoute} />
-                    <Route exact path="/menu" component={MenuRoute} />
-                    <Route path="/menu/:dishId" component={DishRoute}/>
-                    <Route exact path="/about" component={AboutRoute} />
-                    <Route exact path="/contact" component={Contact} />
-                    <Redirect to="/home" />
-                </Switch>
-                <Footer />
-            </Fragment>
+            <BrowserRouter>
+                <Fragment>
+                    <Header />
+                    <Switch>
+                        <Route path="/home" component={HomeRoute} />
+                        <Route exact path="/menu" component={MenuRoute} />
+                        <Route path="/menu/:dishId" component={DishRoute}/>
+                        <Route exact path="/about" component={AboutRoute} />
+                        <Route exact path="/contact" component={Contact} />
+                        <Redirect to="/home" />
+                    </Switch>
+                    <Footer />
+                </Fragment>
+            </BrowserRouter>
         );
     }
 }
 
-export default Main;
+export default App;
