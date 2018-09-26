@@ -1,6 +1,7 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardImg, CardText, CardBody, CardTitle, Container, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import DishComment from './DishComment';
 
 const Comment = ({comment}) => {
     const commentDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(comment.date)));
@@ -39,6 +40,7 @@ const Dish = ({dish, comments}) =>
                             {comments.map((comment) =>
                                 <Comment key={comment.id} comment={comment} />
                             )}
+                            <DishComment />
                         </CardText>
                     </CardBody>
                 </Card>
