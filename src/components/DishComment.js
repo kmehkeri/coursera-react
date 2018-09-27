@@ -16,7 +16,7 @@ class DishComment extends Component {
     }
 
     handleSubmit = (values) => {
-        alert("Submitted with " + JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
     render() {

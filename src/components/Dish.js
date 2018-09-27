@@ -13,7 +13,7 @@ const Comment = ({comment}) => {
     );
 }
 
-const Dish = ({dish, comments}) =>
+const Dish = ({dish, comments, addComment }) =>
     <Container>
         <Row>
             <Breadcrumb>
@@ -40,7 +40,7 @@ const Dish = ({dish, comments}) =>
                             {comments.map((comment) =>
                                 <Comment key={comment.id} comment={comment} />
                             )}
-                            <DishComment />
+                            <DishComment addComment={addComment} dishId={dish.id} />
                         </CardText>
                     </CardBody>
                 </Card>
