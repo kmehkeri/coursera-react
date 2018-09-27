@@ -19,18 +19,14 @@ const mapStateToProps = (state) => {
 }
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const featured = (items) => items.filter((i) => i.featured )[0]
 
         const HomeRoute = () => <Home dish={featured(this.props.dishes)} promotion={featured(this.props.promotions)} leader={featured(this.props.leaders)} />
         const MenuRoute = () => <Menu dishes={this.props.dishes} />
         const DishRoute = ({match}) =>
-            <Dish dish={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId))[0]}
-                  comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId))} />
+            <Dish dish={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
+                  comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))} />
         const AboutRoute = () => <About leaders={this.props.leaders} />
 
         return (

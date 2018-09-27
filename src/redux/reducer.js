@@ -10,6 +10,21 @@ export const initialState = {
     comments: COMMENTS
 };
 
+export const AddComment = (comment) => {
+    return {
+        type: "ADD_COMMENT",
+        comment: comment
+    }
+}
+
 export const Reducer = (state, action) => {
-    return state;
+    switch (action.type) {
+        case "ADD_COMMENT":
+            const id = Math.max(...state.comments.map((comment) => comment.id)) + 1;
+            return Object.assign({}, state, {
+                comments: [ ...state.comments, Object.assign({}, action.comment, { id: id }) ]
+            });
+
+        default: return state;
+    }
 }
