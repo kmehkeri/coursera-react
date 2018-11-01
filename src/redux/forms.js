@@ -1,4 +1,6 @@
-export const initialFeedback = {
+import { createForms } from 'react-redux-form';
+
+const initialFeedback = {
     firstname: '',
     lastname: '',
     tel: '',
@@ -7,3 +9,5 @@ export const initialFeedback = {
     contactType: 'Tel',
     message: ''
 }
+
+export const forms = createForms({ feedback: initialFeedback })
