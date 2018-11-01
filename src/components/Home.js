@@ -1,6 +1,7 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Col, Container, Row, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle} from 'reactstrap';
 import Loading from './Loading';
+import { baseUrl } from '../shared/env';
 
 const RenderCard = ({item, isLoading, errorMessage}) => {
     const content = () => {
@@ -13,7 +14,7 @@ const RenderCard = ({item, isLoading, errorMessage}) => {
         else if (item != null) {
             return (
                 <Card>
-                    <CardImg src={item.image} alt={item.name} />
+                    <CardImg src={baseUrl + '/' + item.image} alt={item.name} />
                     <CardBody>
                         <CardTitle>{item.name}</CardTitle>
                         {item.designation ? <CardSubtitle>{item.designation}</CardSubtitle> : null }
@@ -40,7 +41,7 @@ const Home = (props) =>
         </Row>
         <Row>
             <RenderCard item={props.dish} isLoading={props.dishesLoading} errorMessage={props.dishesErrorMessage} />
-            <RenderCard item={props.promotion} />
+            <RenderCard item={props.promotion} isLoading={props.promosLoading} errorMessage={props.promosErrorMessage} />
             <RenderCard item={props.leader} />
         </Row>
     </Container>

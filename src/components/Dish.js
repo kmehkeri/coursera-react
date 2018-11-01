@@ -3,6 +3,7 @@ import { Breadcrumb, BreadcrumbItem, Card, CardImg, CardText, CardBody, CardTitl
 import { Link } from 'react-router-dom';
 import DishComment from './DishComment';
 import Loading from './Loading';
+import { baseUrl } from '../shared/env';
 
 const Comment = ({comment}) => {
     const commentDate = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).format(new Date(Date.parse(comment.date)));
@@ -46,7 +47,7 @@ const Dish = (props) => {
                 <Row>
                     <Col md="5" className="m-1">
                         <Card>
-                            <CardImg width="100%" src={props.dish.image} alt={props.dish.name} />
+                            <CardImg width="100%" src={baseUrl + '/' + props.dish.image} alt={props.dish.name} />
                             <CardBody>
                                 <CardTitle>{props.dish.name}</CardTitle>
                                 <CardText>{props.dish.description}</CardText>

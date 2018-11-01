@@ -1,4 +1,4 @@
-import { DISHES } from '../shared/dishes';
+import { baseUrl } from '../shared/env';
 
 // Action type constants
 export const DISHES_LOADING = 'DISHES_LOADING';
@@ -26,13 +26,15 @@ export const AddDishes = (dishes) => {
     }
 }
 
+// Handlers
 export const fetchDishes = () => (dispatch) => {
     dispatch(DishesLoading(true));
-    setTimeout(() => {
-        dispatch(AddDishes(DISHES))
-    }, 2000);
+    return fetch(baseUrl + '/dishes')
+        .then(response => response.json())
+        .then(dishes => dispatch(AddDishes(dishes)));
 }
 
+// Reducer
 const initialState = {
     isLoading: true,
     errorMessage: null,
@@ -42,7 +44,7 @@ const initialState = {
 export const dishes = (state = initialState, action) => {
     switch (action.type) {
         case ADD_DISHES:
-            return { ...state, isLoading: false, dishes: DISHES };
+            return { ...state, isLoading: false, dishes: action.dishes };
 
         case DISHES_LOADING:
             return { ...state, isLoading: true, errorMessage: null, dishes: [] }
