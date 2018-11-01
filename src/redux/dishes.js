@@ -1,4 +1,5 @@
 import { baseUrl } from '../shared/env';
+import { handleResponse, handleError } from '../shared/fetch';
 
 // Action type constants
 export const DISHES_LOADING = 'DISHES_LOADING';
@@ -26,12 +27,14 @@ export const AddDishes = (dishes) => {
     }
 }
 
-// Handlers
+// Thunk actions
 export const fetchDishes = () => (dispatch) => {
     dispatch(DishesLoading(true));
     return fetch(baseUrl + '/dishes')
+        .then(handleResponse, handleError)
         .then(response => response.json())
-        .then(dishes => dispatch(AddDishes(dishes)));
+        .then(dishes => dispatch(AddDishes(dishes)))
+        .catch(error => dispatch(DishesFailed(error.message)));
 }
 
 // Reducer

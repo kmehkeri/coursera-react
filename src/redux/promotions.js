@@ -1,4 +1,5 @@
 import { baseUrl } from '../shared/env';
+import { handleResponse, handleError } from '../shared/fetch';
 
 // Action type constants
 const PROMOS_LOADING = "PROMOS_LOADING";
@@ -26,12 +27,14 @@ export const AddPromos = (promos) => {
     }
 }
 
-// Handlers
+// Thunk actions
 export const fetchPromos = () => (dispatch) => {
     dispatch(PromosLoading(true))
     return fetch(baseUrl + '/promotions')
+        .then(handleResponse, handleError)
         .then(response => response.json())
-        .then(promos => dispatch(AddPromos(promos)));
+        .then(promos => dispatch(AddPromos(promos)))
+        .catch(error => dispatch(PromosFailed(error.message)));
 }
 
 // Reducer

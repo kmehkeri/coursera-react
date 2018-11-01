@@ -1,4 +1,5 @@
 import { baseUrl } from '../shared/env';
+import { handleResponse, handleError } from '../shared/fetch';
 
 // Action type constants
 const ADD_COMMENT = "ADD_COMMENT";
@@ -34,12 +35,14 @@ export const CommentsFailed = (errorMessage) => {
     }
 }
 
-// Handlers
+// Thunk actions
 export const fetchComments = () => (dispatch) => {
     dispatch(CommentsLoading(true));
     return fetch(baseUrl + '/comments')
+        .then(handleResponse, handleError)
         .then(response => response.json())
-        .then(comments => dispatch(AddComments(comments)));
+        .then(comments => dispatch(AddComments(comments)))
+        .catch(error => dispatch(CommentsFailed(error.message)));
 }
 
 // Reducer
