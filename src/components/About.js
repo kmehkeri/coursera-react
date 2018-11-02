@@ -1,6 +1,7 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Container, Col, Media, Row } from 'reactstrap'; 
 import { Link } from 'react-router-dom';
+import { Fade, Stagger } from 'react-animation-components';
 import Loading from './Loading';
 import { baseUrl } from '../shared/env';
 
@@ -29,9 +30,13 @@ const Leadership = ({leaders}) => {
     }
     else if (leaders.leaders != null) {
         return (
-            leaders.leaders.map((leader) =>
-                <Leader key={leader.id} leader={leader} />
-            )
+            <Stagger in>
+                {leaders.leaders.map((leader) =>
+                    <Fade in key={leader.id}>
+                        <Leader leader={leader} />
+                    </Fade>
+                )}
+            </Stagger>
         )
     }
 }
