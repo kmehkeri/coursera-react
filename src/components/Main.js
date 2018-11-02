@@ -7,6 +7,7 @@ import { postComment, fetchComments } from '../redux/comments';
 import { fetchDishes } from '../redux/dishes';
 import { fetchPromos } from '../redux/promotions';
 import { fetchLeaders } from '../redux/leaders';
+import { postFeedback } from '../redux/forms';
 import Menu from './Menu';
 import Home from './Home';
 import About from './About';
@@ -30,7 +31,8 @@ const mapDispatchToProps = (dispatch) => ({
     fetchComments: () => { dispatch(fetchComments()) },
     fetchPromos: () => { dispatch(fetchPromos()) },
     fetchLeaders: () => { dispatch(fetchLeaders()) },
-    resetFeedbackForm: () => { dispatch(actions.reset('feedback')) }
+    resetFeedbackForm: () => { dispatch(actions.reset('feedback')) },
+    postFeedback: (firstname, lastname, telnum, email, agree, contactType, message) => dispatch(postFeedback(firstname, lastname, telnum, email, agree, contactType, message))
 })
 
 class Main extends Component {
@@ -63,7 +65,7 @@ class Main extends Component {
                   commentsErrorMessage={this.props.comments.errorMessage}
                   postComment={this.props.postComment} />
         const AboutRoute = () => <About leaders={this.props.leaders} />
-        const ContactRoute = () => <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
+        const ContactRoute = () => <Contact resetFeedbackForm={this.props.resetFeedbackForm} postFeedback={this.props.postFeedback} />
 
         return (
             <Fragment>
