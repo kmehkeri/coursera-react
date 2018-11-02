@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actions } from 'react-redux-form';
-import { AddComment, fetchComments } from '../redux/comments';
+import { postComment, fetchComments } from '../redux/comments';
 import { fetchDishes } from '../redux/dishes';
 import { fetchPromos } from '../redux/promotions';
 import Menu from './Menu';
@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    addComment: (dishId, rating, author, comment) => dispatch(AddComment(dishId, rating, author, comment)),
+    postComment: (dishId, rating, author, comment) => dispatch(postComment(dishId, rating, author, comment)),
     fetchDishes: () => { dispatch(fetchDishes()) },
     fetchComments: () => { dispatch(fetchComments()) },
     fetchPromos: () => { dispatch(fetchPromos()) },
@@ -55,7 +55,7 @@ class Main extends Component {
                   comments={this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))}
                   commentsLoading={this.props.comments.isLoading}
                   commentsErrorMessage={this.props.comments.errorMessage}
-                  addComment={this.props.addComment} />
+                  postComment={this.props.postComment} />
         const AboutRoute = () => <About leaders={this.props.leaders} />
         const ContactRoute = () => <Contact resetFeedbackForm={this.props.resetFeedbackForm} />
 

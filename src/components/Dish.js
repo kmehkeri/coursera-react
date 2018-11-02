@@ -62,7 +62,7 @@ const Dish = (props) => {
                                     {props.comments.map((comment) =>
                                         <Comment key={comment.id} comment={comment} />
                                     )}
-                                    <DishComment addComment={props.addComment} dishId={props.dish.id} />
+                                    <DishComment postComment={props.postComment} dishId={props.dish.id} />
                                 </CardText>
                             </CardBody>
                         </Card>

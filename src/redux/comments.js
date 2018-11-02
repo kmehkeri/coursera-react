@@ -8,10 +8,10 @@ const COMMENTS_LOADING = "COMMENTS_LOADING";
 const COMMENTS_FAILED = "COMMENTS_FAILED";
 
 // Action creators
-export const AddComment = (dishId, rating, author, comment) => {
+export const AddComment = (comment) => {
     return {
         type: ADD_COMMENT,
-        comment: { dishId, rating, author, comment }
+        comment: comment
     }
 }
 
@@ -42,6 +42,23 @@ export const fetchComments = () => (dispatch) => {
         .then(handleResponse, handleError)
         .then(response => response.json())
         .then(comments => dispatch(AddComments(comments)))
+        .catch(error => {
+            console.log("Post comments failed: " + error.message);
+            alert("Your comment could not be posted");
+        });
+}
+
+export const postComment = (dishId, rating, author, comment) => (dispatch) => {
+    const newComment = { dishId, rating, author, comment, date: new Date().toISOString() }
+    return fetch(baseUrl + '/comments', {
+        method: 'POST',
+        body: JSON.stringify(newComment),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin'
+    })
+        .then(handleResponse, handleError)
+        .then(response => response.json())
+        .then(comment => dispatch(AddComment(comment)))
         .catch(error => dispatch(CommentsFailed(error.message)));
 }
 
@@ -64,9 +81,7 @@ export const comments = (state = initialState, action) => {
             return { ...state, isLoading: false, errorMessage: action.errorMessage };
 
         case ADD_COMMENT:
-            const id = Math.max(...state.comments.map((comment) => comment.id)) + 1;
-            const date = new Date().toISOString();
-            return {...state, comments: state.comments.concat(Object.assign({}, action.comment, { id, date })) };
+            return {...state, comments: state.comments.concat(action.comment) };
         
         default:
             return state;
