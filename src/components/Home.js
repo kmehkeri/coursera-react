@@ -45,7 +45,7 @@ const Home = (props) =>
         <Row>
             <RenderCard item={props.dish} isLoading={props.dishesLoading} errorMessage={props.dishesErrorMessage} />
             <RenderCard item={props.promotion} isLoading={props.promosLoading} errorMessage={props.promosErrorMessage} />
-            <RenderCard item={props.leader} />
+            <RenderCard item={props.leader} isLoading={props.leadersLoading} errorMessage={props.leadersErrorMessage} />
         </Row>
     </Container>
 

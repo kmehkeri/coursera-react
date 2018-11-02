@@ -1,11 +1,13 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Container, Col, Media, Row } from 'reactstrap'; 
 import { Link } from 'react-router-dom';
+import Loading from './Loading';
+import { baseUrl } from '../shared/env';
 
 const Leader = ({leader}) =>
     <Media className="mb-4">
         <Media left href="#" className="mr-3">
-            <Media object src={leader.image} alt="Generic placeholder image" />
+            <Media object src={baseUrl + '/' + leader.image} alt="Generic placeholder image" />
         </Media>
         <Media body>
             <Media heading>{leader.name}</Media>
@@ -13,6 +15,26 @@ const Leader = ({leader}) =>
             <p>{leader.description}</p>
         </Media>
     </Media>
+
+const Leadership = ({leaders}) => {
+    if (leaders.isLoading) {
+        return (
+            <Loading />
+        );
+    }
+    else if (leaders.errorMessage != null) {
+        return (
+            <p>{leaders.errorMessage}</p>
+        );
+    }
+    else if (leaders.leaders != null) {
+        return (
+            leaders.leaders.map((leader) =>
+                <Leader key={leader.id} leader={leader} />
+            )
+        )
+    }
+}
 
 const About = ({leaders}) =>
     <Container>
@@ -34,9 +56,7 @@ const About = ({leaders}) =>
             </Col>
             <Col xs="12">
                 <h3>Our leadership</h3>
-                {leaders.map((leader) =>
-                    <Leader key={leader.id} leader={leader} />
-                )}
+                <Leadership leaders={leaders} />
             </Col>
         </Row>
     </Container>

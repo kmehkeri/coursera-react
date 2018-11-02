@@ -6,6 +6,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { postComment, fetchComments } from '../redux/comments';
 import { fetchDishes } from '../redux/dishes';
 import { fetchPromos } from '../redux/promotions';
+import { fetchLeaders } from '../redux/leaders';
 import Menu from './Menu';
 import Home from './Home';
 import About from './About';
@@ -28,6 +29,7 @@ const mapDispatchToProps = (dispatch) => ({
     fetchDishes: () => { dispatch(fetchDishes()) },
     fetchComments: () => { dispatch(fetchComments()) },
     fetchPromos: () => { dispatch(fetchPromos()) },
+    fetchLeaders: () => { dispatch(fetchLeaders()) },
     resetFeedbackForm: () => { dispatch(actions.reset('feedback')) }
 })
 
@@ -36,6 +38,7 @@ class Main extends Component {
         this.props.fetchDishes();
         this.props.fetchPromos();
         this.props.fetchComments();
+        this.props.fetchLeaders();
     }
 
     render() {
@@ -47,7 +50,9 @@ class Main extends Component {
                                       promotion={featured(this.props.promotions.promotions)}
                                       promosLoading={this.props.promotions.isLoading}
                                       promosErrorMessage={this.props.promotions.errorMessage}
-                                      leader={featured(this.props.leaders)} />
+                                      leader={featured(this.props.leaders.leaders)} 
+                                      leadersLoading={this.props.leaders.isLoading}
+                                      leadersErrorMessage={this.props.leaders.errorMessage} />
         const MenuRoute = () => <Menu dishes={this.props.dishes} />
         const DishRoute = ({match}) =>
             <Dish dish={this.props.dishes.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}
